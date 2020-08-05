@@ -40,15 +40,144 @@
   "policies": [],
   "queues": [
     {
-      "name": "EventQ",
+      "name": "HUv1CoreToCom",
       "vhost": "/",
-      "durable": false,
-      "auto_delete": true,
+      "durable": true,
+      "auto_delete": false,
       "arguments": {
         "x-queue-type": "classic"
       }
+    },
+    {
+      "name": "HUv1ComToCore",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    },
+    {
+      "name": "DataStore",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    },
+    {
+      "name": "HUv1CoreToUI",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    },
+    {
+      "name": "CoreToHealthService",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    },
+    {
+      "name": "HealthServiceOutBound",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    },
+    {
+      "name": "HeadUnitv1In",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
     }
   ],
-  "exchanges": [],
-  "bindings": []
+  "exchanges": [
+    {
+      "name": "HUv1Frontend",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "HUv1Backend",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "HeadUnitv1",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "HUv1Backend",
+      "vhost": "/",
+      "destination": "HUv1ComToCore",
+      "destination_type": "queue",
+      "routing_key": "HUv1ComToCore.#",
+      "arguments": {}
+    },
+    {
+      "source": "HUv1Frontend",
+      "vhost": "/",
+      "destination": "DataStore",
+      "destination_type": "queue",
+      "routing_key": "#.DataStore",
+      "arguments": {}
+    },
+    {
+      "source": "HUv1Frontend",
+      "vhost": "/",
+      "destination": "CoreToHealthService",
+      "destination_type": "queue",
+      "routing_key": "CoreToHealthService",
+      "arguments": {}
+    },
+    {
+      "source": "HUv1Frontend",
+      "vhost": "/",
+      "destination": "HUv1CoreToUI",
+      "destination_type": "queue",
+      "routing_key": "HUv1CoreToUI",
+      "arguments": {}
+    },
+    {
+      "source": "HUv1Frontend",
+      "vhost": "/",
+      "destination": "HealthServiceOutBound",
+      "destination_type": "queue",
+      "routing_key": "HealthServiceOutBound",
+      "arguments": {}
+    },
+    {
+      "source": "HeadUnitv1",
+      "vhost": "/",
+      "destination": "HeadUnitv1In",
+      "destination_type": "queue",
+      "routing_key": "HeadUnitv1In",
+      "arguments": {}
+    }
+  ]
 }
