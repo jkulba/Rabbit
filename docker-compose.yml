@@ -1,15 +1,14 @@
-version: "3"
+version: "3.8"
+
 services:
   rabbitmq:
-    image: "rabbitmq:3-management"
-    environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin
-    ports:
-      - "5672:5672"
-      - "15672:15672"
+    image: rabbitmq:3-management
+    hostname: malina
     volumes:
-      - "rabbitmq_data:/data"
-      - ./conf/rabbit.basic.config.json:/etc/rabbitmq/rabbitmq.config
-volumes:
-  rabbitmq_data:
+      - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
+      - ./rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@malina
+      - ./rabbitmq/logs:/var/log/rabbitmq/log
+    ports:
+      - 5672:5672
+      - 15672:15672
