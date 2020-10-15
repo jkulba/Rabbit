@@ -38,146 +38,301 @@
     }
   ],
   "policies": [],
-  "queues": [
-    {
-      "name": "HUv1CoreToCom",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {
+  "queues": [{
+    "name": "HUv1ComToCore",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
         "x-queue-type": "classic"
-      }
-    },
-    {
-      "name": "HUv1ComToCore",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {
-        "x-queue-type": "classic"
-      }
-    },
-    {
-      "name": "DataStore",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {
-        "x-queue-type": "classic"
-      }
-    },
-    {
-      "name": "HUv1CoreToUI",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {
-        "x-queue-type": "classic"
-      }
-    },
-    {
-      "name": "CoreToHealthService",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {
-        "x-queue-type": "classic"
-      }
-    },
-    {
-      "name": "HealthServiceOutBound",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {
-        "x-queue-type": "classic"
-      }
-    },
-    {
-      "name": "HeadUnitv1In",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {}
     }
-  ],
-  "exchanges": [
-    {
-      "name": "HUv1Frontend",
-      "vhost": "/",
-      "type": "topic",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    },
-    {
-      "name": "HUv1Backend",
-      "vhost": "/",
-      "type": "topic",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    },
-    {
-      "name": "HeadUnitv1",
-      "vhost": "/",
-      "type": "direct",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
+},{
+    "name": "HUv1ComToCoreCommandReplies",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
     }
-  ],
-  "bindings": [
-    {
-      "source": "HUv1Backend",
-      "vhost": "/",
-      "destination": "HUv1ComToCore",
-      "destination_type": "queue",
-      "routing_key": "HUv1ComToCore.#",
-      "arguments": {}
-    },
-    {
-      "source": "HUv1Frontend",
-      "vhost": "/",
-      "destination": "DataStore",
-      "destination_type": "queue",
-      "routing_key": "#.DataStore",
-      "arguments": {}
-    },
-    {
-      "source": "HUv1Frontend",
-      "vhost": "/",
-      "destination": "CoreToHealthService",
-      "destination_type": "queue",
-      "routing_key": "CoreToHealthService",
-      "arguments": {}
-    },
-    {
-      "source": "HUv1Frontend",
-      "vhost": "/",
-      "destination": "HUv1CoreToUI",
-      "destination_type": "queue",
-      "routing_key": "HUv1CoreToUI",
-      "arguments": {}
-    },
-    {
-      "source": "HUv1Frontend",
-      "vhost": "/",
-      "destination": "HealthServiceOutBound",
-      "destination_type": "queue",
-      "routing_key": "HealthServiceOutBound",
-      "arguments": {}
-    },
-    {
-      "source": "HeadUnitv1",
-      "vhost": "/",
-      "destination": "HeadUnitv1In",
-      "destination_type": "queue",
-      "routing_key": "HeadUnitv1In",
-      "arguments": {}
+},{
+    "name": "HUv1ComToCoreEvents",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
     }
-  ]
+},{
+    "name": "HUv1ComToCoreErrorEvents",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+},{
+    "name": "HUv1ComToCoreGenericData",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+},{
+    "name": "HUv1ComToCoreImpedanceData",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+},{
+    "name": "HUv1ComToCoreBadPacket",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+},{
+    "name": "HUv1CoreToCom",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+},{
+    "name": "HUv1CoreToComCommands",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+},{
+    "name": "DataStoreRequests",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+},{
+    "name": "DataStoreToUI",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+},{
+    "name": "HUv1CoreToUI",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+}, {
+    "name": "CoreToHealthService",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+}, {
+    "name": "CoreToUICommandReplies",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+}, {
+    "name": "UIToCoreCommands",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+}, {
+    "name": "CoreToProcessorImpedanceData",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+}, {
+    "name": "ProcessorToCoreImpedanceData",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+}, {
+    "name": "CoreToUIImpedanceData",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+}, {
+    "name": "HealthServiceOutBound",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+}],
+"exchanges": [{
+    "name": "HUv1Frontend",
+    "vhost": "/",
+    "type": "topic",
+    "durable": true,
+    "auto_delete": false,
+    "internal": false,
+    "arguments": {}
+}, {
+    "name": "HUv1Backend",
+    "vhost": "/",
+    "type": "topic",
+    "durable": true,
+    "auto_delete": false,
+    "internal": false,
+    "arguments": {}
+}],
+"bindings": [{
+    "source": "HUv1Backend",
+    "vhost": "/",
+    "destination": "HUv1ComToCoreCommandReplies",
+    "destination_type": "queue",
+    "routing_key": "HUv1ComToCoreCommandReplies",
+    "arguments": {}
+},{
+    "source": "HUv1Backend",
+    "vhost": "/",
+    "destination": "ProcessorToCoreImpedanceData",
+    "destination_type": "queue",
+    "routing_key": "ProcessorToCoreImpedanceData",
+    "arguments": {}
+},{
+    "source": "HUv1Backend",
+    "vhost": "/",
+    "destination": "CoreToProcessorImpedanceData",
+    "destination_type": "queue",
+    "routing_key": "CoreToProcessorImpedanceData",
+    "arguments": {}
+},{
+    "source": "HUv1Backend",
+    "vhost": "/",
+    "destination": "HUv1ComToCore",
+    "destination_type": "queue",
+    "routing_key": "HUv1ComToCore",
+    "arguments": {}
+},{
+    "source": "HUv1Backend",
+    "vhost": "/",
+    "destination": "HUv1ComToCoreEvents",
+    "destination_type": "queue",
+    "routing_key": "HUv1ComToCoreEvents",
+    "arguments": {}
+},{
+    "source": "HUv1Backend",
+    "vhost": "/",
+    "destination": "HUv1ComToCoreErrorEvents",
+    "destination_type": "queue",
+    "routing_key": "HUv1ComToCoreErrorEvents",
+    "arguments": {}
+},{
+    "source": "HUv1Backend",
+    "vhost": "/",
+    "destination": "HUv1ComToCoreGenericData",
+    "destination_type": "queue",
+    "routing_key": "HUv1ComToCoreGenericData",
+    "arguments": {}
+},{
+    "source": "HUv1Backend",
+    "vhost": "/",
+    "destination": "HUv1ComToCoreImpedanceData",
+    "destination_type": "queue",
+    "routing_key": "HUv1ComToCoreImpedanceData",
+    "arguments": {}
+},{
+    "source": "HUv1Backend",
+    "vhost": "/",
+    "destination": "HUv1CoreToComCommands",
+    "destination_type": "queue",
+    "routing_key": "HUv1CoreToComCommands",
+    "arguments": {}
+},{
+    "source": "HUv1Backend",
+    "vhost": "/",
+    "destination": "HUv1ComToCoreBadPacket",
+    "destination_type": "queue",
+    "routing_key": "HUv1ComToCoreBadPacket",
+    "arguments": {}
+},{
+    "source": "HUv1Frontend",
+    "vhost": "/",
+    "destination": "DataStoreToUI",
+    "destination_type": "queue",
+    "routing_key": "DataStoreToUI",
+    "arguments": {}
+},{
+    "source": "HUv1Frontend",
+    "vhost": "/",
+    "destination": "DataStoreRequests",
+    "destination_type": "queue",
+    "routing_key": "DataStoreRequests",
+    "arguments": {}
+},{
+    "source": "HUv1Frontend",
+    "vhost": "/",
+    "destination": "CoreToHealthService",
+    "destination_type": "queue",
+    "routing_key": "CoreToHealthService",
+    "arguments": {}
+},{
+    "source": "HUv1Frontend",
+    "vhost": "/",
+    "destination": "HUv1CoreToUI",
+    "destination_type": "queue",
+    "routing_key": "HUv1CoreToUI",
+    "arguments": {}
+},{
+    "source": "HUv1Frontend",
+    "vhost": "/",
+    "destination": "HealthServiceOutBound",
+    "destination_type": "queue",
+    "routing_key": "HealthServiceOutBound",
+    "arguments": {}
+},{
+    "source": "HUv1Frontend",
+    "vhost": "/",
+    "destination": "CoreToUICommandReplies",
+    "destination_type": "queue",
+    "routing_key": "CoreToUICommandReplies",
+    "arguments": {}
+},{
+    "source": "HUv1Frontend",
+    "vhost": "/",
+    "destination": "UIToCoreCommands",
+    "destination_type": "queue",
+    "routing_key": "UIToCoreCommands",
+    "arguments": {}
+},{
+    "source": "HUv1Frontend",
+    "vhost": "/",
+    "destination": "CoreToUIImpedanceData",
+    "destination_type": "queue",
+    "routing_key": "CoreToUIImpedanceData",
+    "arguments": {}
+}]
 }
