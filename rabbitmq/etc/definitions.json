@@ -5,8 +5,8 @@
   "product_version": "3.8.5",
   "users": [
     {
-      "name": "admin",
-      "password_hash": "yWIVNwIGDeuU7GFbf1zWsmCQtsWrEKKWMyFih3otJXKLh5sC",
+      "name": "guest",
+      "password_hash": "Snggtsy7Pxixdr7+kVi0LdX1eoa0m6vOYSEbnJHNytpUhkyO",
       "hashing_algorithm": "rabbit_password_hashing_sha256",
       "tags": "administrator"
     }
@@ -18,7 +18,7 @@
   ],
   "permissions": [
     {
-      "user": "admin",
+      "user": "guest",
       "vhost": "/",
       "configure": ".*",
       "write": ".*",
