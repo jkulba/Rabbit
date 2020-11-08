@@ -1,0 +1,40 @@
+Executed the following commands on Raspberry Pi
+
+# Create new user
+sudo rabbitmqctl add_user joe joe
+
+# Set permissions for new user
+sudo rabbitmqctl set_permissions -p / joe ".*" ".*" ".*"
+
+# Grant administrator access to new user
+sudo rabbitmqctl set_user_tags joe management administrator
+
+# List available vhosts
+curl -i -u joe:joe http://localhost:15672/api/vhosts
+
+# Create new Exchange
+curl -i -u joe:joe -H "content-type:application/json" \
+    -XPUT -d'{"type":"direct","durable":true}' \
+    http://localhost:15672/api/exchanges/%2f/hallcrestex
+
+# Delete Exchange
+curl -i -u joe:joe -H "content-type:application/json" \
+    -XDELETE http://localhost:15672/api/exchanges/%2f/hallcrestex
+
+# Create Queue
+curl -i -u joe:joe -H "content-type:application/json" \
+    -XPUT -d'{"auto_delete":false,"durable":true,"arguments":{}}' \
+    http://localhost:15672/api/queues/%2f/jqueue
+
+# Create Binding - Bind the Queue to the Exchange with a Routing Key
+curl -i -u joe:joe -H "content-type:application/json" \
+    -XPOST -d'{"routing_key":"jqueue","arguments":{}}' \
+    http://localhost:15672/api/bindings/%2f/e/hallcrestex/q/jqueue
+
+curl -i -u joe:joe -H "content-type:application/json" \
+    -XPOST -d'{"count":1,"ackmode":"ack_requeue_false","encoding":"auto","truncate":50000}' \
+    http://localhost:15672/api/queues/%2f/jqueue/get
+
+curl -i -u joe:joe -H "content-type:application/json" \
+    -XPOST -d'{"properties":{},"routing_key":"jqueue","payload":"44.4","payload_encoding":"string"}' \
+    http://localhost:15672/api/exchanges/%2f/hallcrestex/publish
