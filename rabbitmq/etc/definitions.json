@@ -183,6 +183,22 @@
         "x-queue-type": "classic"
     }
 }, {
+    "name": "CoreToProcessorTrainOfFourData",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+}, {
+    "name": "ProcessorToCoreTrainOfFourData",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": {
+        "x-queue-type": "classic"
+    }
+}, {
     "name": "HealthServiceOutBound",
     "vhost": "/",
     "durable": true,
