@@ -248,6 +248,21 @@
 },{
     "source": "HUv1Backend",
     "vhost": "/",
+    "destination": "ProcessorToCoreTrainOfFourData",
+    "destination_type": "queue",
+    "routing_key": "ProcessorToCoreTrainOfFourData",
+    "arguments": {}
+},{
+    "source": "HUv1Backend",
+    "vhost": "/",
+    "destination": "CoreToProcessorTrainOfFourData",
+    "destination_type": "queue",
+    "routing_key": "CoreToProcessorTrainOfFourData",
+    "arguments": {}
+
+},{
+    "source": "HUv1Backend",
+    "vhost": "/",
     "destination": "HUv1ComToCore",
     "destination_type": "queue",
     "routing_key": "HUv1ComToCore",
