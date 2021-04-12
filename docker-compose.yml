@@ -3,7 +3,7 @@ version: "3.8"
 services:
   rabbitmq:
     image: rabbitmq:3-management
-    hostname: malina
+    hostname: ultra2
     volumes:
       - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
       - ./rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
