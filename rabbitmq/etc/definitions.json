@@ -30,7 +30,7 @@
   "global_parameters": [
     {
       "name": "cluster_name",
-      "value": "rabbit@malina"
+      "value": "rabbit@ultra2"
     },
     {
       "name": "internal_cluster_id",

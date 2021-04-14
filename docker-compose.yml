@@ -7,7 +7,7 @@ services:
     volumes:
       - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
       - ./rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
-      - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@malina
+      - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@ultra2
       - ./rabbitmq/logs:/var/log/rabbitmq/log
     ports:
       - 5672:5672
